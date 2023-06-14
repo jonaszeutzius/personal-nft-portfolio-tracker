@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NFTPortfolioTracker.css';
 
-const NFTPortfolioTracker = ({ owner_address }) => {
+const NFTPortfolioTracker = () => {
     const [nfts, setNfts] = useState([]);
+    const [address, setAddress] = useState('');
     // Additional state variables if needed
   
     // Component logic goes here
     const fetchNFTs = () => {
         const options = {
           method: 'GET',
-          url: `http://localhost:8080/v1/nfts/owner/${owner_address}?chain=eth-main&include_nft_details=true&cursor=7&page_size=20`,
+          url: `http://localhost:8080/v1/nfts/owner/${address}?chain=eth-main&include_nft_details=true&cursor=7&page_size=20`,
           headers: { accept: 'application/json', 'X-API-KEY': '2jhzbqIWanB8puiqySBIWJVf6Ovp7oPW' },
         };
         
@@ -29,6 +30,11 @@ const NFTPortfolioTracker = ({ owner_address }) => {
       }, []);
       return (
         <div>
+          <h1>NFT Portfolio Tracker</h1>
+          <div className='inputContainer'>
+            <input type="text" placeholder="Wallet Address" onChange={(e) => setAddress(e.target.value)} />
+            <button onClick={fetchNFTs}>Verify Ownership</button>
+          </div>
           {nfts.map((nft) => (
             <div key={nft.id}>
               <h2>{nft.nft_details?.token_name || 'N/A'}</h2>
