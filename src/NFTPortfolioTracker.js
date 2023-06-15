@@ -32,7 +32,7 @@ const NFTPortfolioTracker = () => {
       return (
         <div>
           <h1 className='title'>NFT Portfolio Tracker</h1>
-          <p>Input NFT token ID and contract address below to see recent transaction price.</p>
+          <p>Input a wallet address below to see what NFTs that wallet owns.</p>
           <div className='inputContainer'>
             <input type="text" placeholder="Wallet Address" onChange={(e) => setAddress(e.target.value)} />
             <button onClick={fetchNFTs}>View Portfolio</button>
@@ -40,7 +40,7 @@ const NFTPortfolioTracker = () => {
           {nfts.map((nft) => (
             <div key={nft.id}>
               <h2>{nft.nft_details?.token_name || 'N/A'}</h2>
-              <img src={nft.nft_details.cached_images.original || 'placeholder-image-url'} alt="NFT Image" />
+              <img src={nft.nft_details.cached_images.tiny_100_100 || 'placeholder-image-url'} alt="NFT Image" />
               {/* Render additional NFT information */}
             </div>
           ))}
