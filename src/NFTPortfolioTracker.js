@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NFTPortfolioTracker.css';
+import './App.css'
 
 const NFTPortfolioTracker = () => {
     const [nfts, setNfts] = useState([]);
@@ -30,10 +31,11 @@ const NFTPortfolioTracker = () => {
       }, []);
       return (
         <div>
-          <h1>NFT Portfolio Tracker</h1>
+          <h1 className='title'>NFT Portfolio Tracker</h1>
+          <p>Input NFT token ID and contract address below to see recent transaction price.</p>
           <div className='inputContainer'>
             <input type="text" placeholder="Wallet Address" onChange={(e) => setAddress(e.target.value)} />
-            <button onClick={fetchNFTs}>Verify Ownership</button>
+            <button onClick={fetchNFTs}>View Portfolio</button>
           </div>
           {nfts.map((nft) => (
             <div key={nft.id}>
