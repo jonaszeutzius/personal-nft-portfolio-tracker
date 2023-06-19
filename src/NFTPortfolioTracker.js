@@ -15,14 +15,13 @@ const NFTPortfolioTracker = () => {
       url: `http://localhost:8080/v1/nfts/owner/${address}?chain=${blockchain}&include_nft_details=true&cursor=7&page_size=20`,
       headers: { accept: 'application/json', 'X-API-KEY': '2jhzbqIWanB8puiqySBIWJVf6Ovp7oPW' },
     };
-  
+
     try {
       const response = await axios.request(options);
-      console.log('response', response)
       setNfts(response.data.results);
       setError(null); // Reset error state if successful
     } catch (error) {
-      setNfts('')
+      setNfts(null);
       setError('Error: Verify that chain and wallet address are valid!'); // Set error message if API call fails
     }
   };
@@ -31,10 +30,7 @@ const NFTPortfolioTracker = () => {
     setBlockchain(event.target.value);
   };
 
-  const checkData = (data) => {
-    const output = data ? data : 'N/A'
-    return output
-  }
+  const checkData = (data) => (data ? data : 'N/A');
 
   return (
     <div>
@@ -54,34 +50,36 @@ const NFTPortfolioTracker = () => {
         <input type="text" placeholder="Wallet Address" onChange={(e) => setAddress(e.target.value)} />
         <button onClick={fetchNFTs}>View Portfolio</button>
       </div>
-      {error ? 
-        <p className='errorMessage'>{error}</p> :
+      {error ? (
+        <p className="errorMessage">{error}</p>
+      ) : (
         nfts && (
           <table>
             <thead>
               <tr style={{ backgroundColor: '#f2f2f2' }}>
-                <th style={{ padding: '10px', textAlign: 'left' }}>Token Name</th>
-                <th style={{ padding: '10px', textAlign: 'left' }}>Id</th>
-                <th style={{ padding: '10px', textAlign: 'left' }}>Token Type</th>
-                <th style={{ padding: '10px', textAlign: 'left' }}>Contract Address</th>
-                <th style={{ padding: '10px', textAlign: 'left' }}>Image</th>
+                <th>Token Name</th>
+                <th>Id</th>
+                <th>Token Type</th>
+                <th>Contract Address</th>
+                <th>Image</th>
               </tr>
             </thead>
             <tbody>
               {nfts.map((nft, index) => (
                 <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'white' }}>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.nft_details.token_name)}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.id)}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.token_type)}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.contract_address)}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>
+                  <td>{checkData(nft.nft_details.token_name)}</td>
+                  <td>{checkData(nft.id)}</td>
+                  <td>{checkData(nft.token_type)}</td>
+                  <td>{checkData(nft.contract_address)}</td>
+                  <td>
                     <img src={nft.nft_details.cached_images.tiny_100_100} alt="NFT" />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        )}
+        )
+      )}
     </div>
   );
 };
