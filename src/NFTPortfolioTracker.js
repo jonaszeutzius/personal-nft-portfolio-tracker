@@ -31,6 +31,11 @@ const NFTPortfolioTracker = () => {
     setBlockchain(event.target.value);
   };
 
+  const checkData = (data) => {
+    const output = data ? data : 'N/A'
+    return output
+  }
+
   return (
     <div>
       <h1 className="title">NFT Portfolio Tracker</h1>
@@ -65,10 +70,10 @@ const NFTPortfolioTracker = () => {
             <tbody>
               {nfts.map((nft, index) => (
                 <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'white' }}>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{nft.nft_details.token_name}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{nft.id}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{nft.token_type}</td>
-                  <td style={{ padding: '10px', textAlign: 'left' }}>{nft.contract_address}</td>
+                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.nft_details.token_name)}</td>
+                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.id)}</td>
+                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.token_type)}</td>
+                  <td style={{ padding: '10px', textAlign: 'left' }}>{checkData(nft.contract_address)}</td>
                   <td style={{ padding: '10px', textAlign: 'left' }}>
                     <img src={nft.nft_details.cached_images.tiny_100_100} alt="NFT" />
                   </td>
