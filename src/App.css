@@ -40,7 +40,6 @@
   cursor: pointer;
 }
 
-/* ```css */
 .inputContainer button:hover {
   background-color: #0056b3;
 }
