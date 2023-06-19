@@ -172,7 +172,6 @@ To enhance the user interface in the browser, replace all code in the App.css fi
   cursor: pointer;
 }
 
-/* ```css */
 .inputContainer button:hover {
   background-color: #0056b3;
 }
