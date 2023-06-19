@@ -36,7 +36,6 @@ Next, you'll need to create a React component that uses the Blockspan API to fet
 ```
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NFTPortfolioTracker.css';
 import './App.css';
 
 const NFTPortfolioTracker = () => {
