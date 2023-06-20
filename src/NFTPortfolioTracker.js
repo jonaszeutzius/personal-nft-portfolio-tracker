@@ -71,7 +71,18 @@ const NFTPortfolioTracker = () => {
                   <td>{checkData(nft.token_type)}</td>
                   <td>{checkData(nft.contract_address)}</td>
                   <td>
-                    <img src={nft.nft_details.cached_images.tiny_100_100} alt="NFT" />
+                    <div className="imageContainer">
+                      {nft.nft_details.cached_images && nft.nft_details.cached_images.medium_500_500 ? (
+                        <img 
+                          className="image" 
+                          src={nft.nft_details.cached_images.medium_500_500} 
+                          alt={nft.nft_details.name}/>
+                      ) : (
+                        <div className='message'>
+                          Image not available.
+                        </div>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
