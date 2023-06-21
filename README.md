@@ -134,7 +134,7 @@ export default NFTPortfolioTracker;
 
 ```
 
-Remember to replace 'YOUR_BLOCKSPAN_API_KEY' with your actual Blockspan API key.
+Remember to replace `YOUR_BLOCKSPAN_API_KEY` with your actual Blockspan API key.
 
 
 ## STEP 4: UPDATING THE STYLES WITHIN CSS FILE
