@@ -18,10 +18,10 @@ const NFTPortfolioTracker = () => {
     try {
       const response = await axios.request(options);
       setNfts(response.data.results);
-      setError(null); // Reset error state if successful
+      setError(null);
     } catch (error) {
       setNfts(null);
-      setError('Error: Verify that chain and wallet address are valid!'); // Set error message if API call fails
+      setError('Error: Verify that chain and wallet address are valid!');
     }
   };
 

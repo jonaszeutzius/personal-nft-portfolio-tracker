@@ -47,17 +47,17 @@ const NFTPortfolioTracker = () => {
   const fetchNFTs = async () => {
     const options = {
       method: 'GET',
-      url: `https://api.blockspan.com/v1/nfts/owner/${address}?chain=${blockchain}&include_nft_details=true&cursor=7&page_size=20`,
+      url: `http://localhost:8080/v1/nfts/owner/${address}?chain=${blockchain}&include_nft_details=true&cursor=7&page_size=20`,
       headers: { accept: 'application/json', 'X-API-KEY': 'YOUR_BLOCKSPAN_API_KEY' },
     };
 
     try {
       const response = await axios.request(options);
       setNfts(response.data.results);
-      setError(null); // Reset error state if successful
+      setError(null);
     } catch (error) {
       setNfts(null);
-      setError('Error: Verify that chain and wallet address are valid!'); // Set error message if API call fails
+      setError('Error: Verify that chain and wallet address are valid!');
     }
   };
 
@@ -107,7 +107,18 @@ const NFTPortfolioTracker = () => {
                   <td>{checkData(nft.token_type)}</td>
                   <td>{checkData(nft.contract_address)}</td>
                   <td>
-                    <img src={nft.nft_details.cached_images.tiny_100_100} alt="NFT" />
+                    <div className="imageContainer">
+                      {nft.nft_details.cached_images && nft.nft_details.cached_images.medium_500_500 ? (
+                        <img 
+                          className="image" 
+                          src={nft.nft_details.cached_images.medium_500_500} 
+                          alt={nft.nft_details.name}/>
+                      ) : (
+                        <div className='message'>
+                          Image not available.
+                        </div>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -120,6 +131,7 @@ const NFTPortfolioTracker = () => {
 };
 
 export default NFTPortfolioTracker;
+
 ```
 
 Remember to replace 'YOUR_BLOCKSPAN_API_KEY' with your actual Blockspan API key.
@@ -135,12 +147,23 @@ To enhance the user interface in the browser, replace all code in the App.css fi
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .title {
   margin-top: 20px;
   margin-bottom: 0;
+  text-align: center;
+}
+
+.errorMessage {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+.message {
   text-align: center;
 }
 
@@ -179,18 +202,14 @@ To enhance the user interface in the browser, replace all code in the App.css fi
 .imageContainer {
   display: flex;
   justify-content: center;
+  width: 100%; 
 }
 
-.message {
-  text-align: center;
+.imageContainer img {
+  width: 100%; 
+  max-width: 100px;
+  height: auto; 
 }
-
-.errorMessage {
-  text-align: center;
-  color: red;
-  font-weight: bold;
-}
-
 .nftData {
   display: flex;
   flex-direction: column;
@@ -221,6 +240,11 @@ td {
 th {
   padding: 10px;
   text-align: left;
+}
+
+.tableContainer {
+  display: flex;
+  justify-content: center;
 }
 
 ```
