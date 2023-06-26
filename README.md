@@ -47,7 +47,7 @@ const NFTPortfolioTracker = () => {
   const fetchNFTs = async () => {
     const options = {
       method: 'GET',
-      url: `http://localhost:8080/v1/nfts/owner/${address}?chain=${blockchain}&include_nft_details=true&cursor=7&page_size=20`,
+      url: `https://api.blockspan.com/v1/nfts/owner/${address}?chain=${blockchain}&include_nft_details=true&cursor=7&page_size=20`,
       headers: { accept: 'application/json', 'X-API-KEY': 'YOUR_BLOCKSPAN_API_KEY' },
     };
 
