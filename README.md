@@ -282,6 +282,6 @@ You should now see the following:
 - A text box for wallet address
 - A view portfolio button
 
-Input the wallet address you wish to see the portfolio of, and click the view portfolio button. You should then a table with all the NFTs owned by that wallet.
+Input the wallet address you wish to see the portfolio of, and click the view portfolio button. You should then see a table with all the NFTs owned by that wallet.
 
 That's it! You've built a personal NFT portfolio tracker using Blockspan API and ReactJS! This is a simple example, but with the power of Blockspan API, you can build even more comprehensive and interactive NFT explorers. Happy coding!
